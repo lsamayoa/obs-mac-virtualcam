@@ -1,0 +1,2 @@
+# OBS VirtualCam Mac Plugin
+
