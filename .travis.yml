@@ -5,7 +5,7 @@ script:
   - cd libcoremediaio-dal
   - mkdir build && cd build && cmake .. && sudo make install
   - cd ../../
-  - cd coremdiaio-dal-ipc
+  - cd coremediaio-dal-ipc
   - mkdir build && cd build && cmake .. && sudo make install
   - cd ../../
   - cd dal-plugin
