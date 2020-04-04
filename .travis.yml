@@ -3,9 +3,16 @@ git:
 
 script:
   - cd libcoremediaio-dal
-  - mkdir build
-  - cd build
-  - cmake .. && sudo make install
+  - mkdir build && cd build && cmake .. && sudo make install
+  - cd ../../
+  - cd coremdiaio-dal-ipc
+  - mkdir build && cd build && cmake .. && sudo make install
+  - cd ../../
+  - cd dal-plugin
+  - mkdir build && cd build && cmake .. && make
+  - cd ../../
+  - cd obs-plugin
+  - mkdir build && cd build && cmake .. && make
 matrix:
   include:
     - os: osx
