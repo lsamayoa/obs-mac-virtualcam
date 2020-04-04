@@ -45,12 +45,10 @@ set(coremediaio-dal-ipc_HEADERS
     server/Device/CMIO_DPA_Sample_Server_Device.h
     server/Device/CMIO_DPA_Sample_Server_Frame.h
     server/Device/CMIO_DPA_Sample_Server_Stream.h
-    server/Device/CMIO_DPA_Sample_Server_VCamDevice.h
     server/Device/CMIO_DPA_Sample_Server_VCamInputStream.h
     server/CMIO_DPA_Sample_Server_Assistant.h
     server/CMIO_DPA_Sample_Server_Common.h
     server/CMIO_DPA_Sample_Server_MIGInterface.h
-    server/CMIO_DPA_Sample_Server_VCamAssistant.h
     server/CMIODPASampleServer.h)
 
 set(coremediaio-dal-ipc_SOURCES
@@ -64,11 +62,9 @@ set(coremediaio-dal-ipc_SOURCES
     server/Device/CMIO_DPA_Sample_Server_Device.cpp
     server/Device/CMIO_DPA_Sample_Server_Frame.cpp
     server/Device/CMIO_DPA_Sample_Server_Stream.cpp
-    server/Device/CMIO_DPA_Sample_Server_VCamDevice.cpp
     server/Device/CMIO_DPA_Sample_Server_VCamInputStream.cpp
     server/CMIO_DPA_Sample_Server_Assistant.cpp
     server/CMIO_DPA_Sample_Server_MIGInterface.cpp
-    server/CMIO_DPA_Sample_Server_VCamAssistant.cpp
     server/CMIODPASampleServer.cpp)
 
 
