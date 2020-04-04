@@ -2,7 +2,7 @@ language: cpp
 git:
   submodules: true
 before_install:
-  - brew install FFmpeg x264 cmake mbedtls swig
+  - brew install FFmpeg x264 mbedtls swig
 script:
   - cd libcoremediaio-dal
   - mkdir build && cd build && cmake .. && sudo make install
