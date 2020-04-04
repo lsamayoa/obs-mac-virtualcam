@@ -5,7 +5,6 @@ find_package(PkgConfig REQUIRED)
 # We need this since we are using installed libraries using pkg-config
 SET(CMAKE_MODULE_LINKER_FLAGS "-L/usr/local/lib")
 
-
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++ -std=c++11")
 
 pkg_check_modules(COREMEDIAIO_DAL REQUIRED coremediaio-dal)
