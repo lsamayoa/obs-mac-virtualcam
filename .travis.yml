@@ -2,7 +2,7 @@ git:
   submodules: true
 
 script:
-  - cd libcoremediaio-da
+  - cd libcoremediaio-dal
   - mkdir build
   - cd build
   - cmake .. && sudo make install
