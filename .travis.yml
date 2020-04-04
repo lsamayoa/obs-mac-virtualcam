@@ -19,7 +19,7 @@ script:
   - mkdir build && cd build && cmake .. && make
   - cd ../../
   - cd obs-plugin
-  - mkdir build && cd build && cmake -DLIBOBS_INCLUDE_DIR=../../obs-studio/libobs -D .. && make
+  - mkdir build && cd build && cmake -DLIBOBS_INCLUDE_DIR=../../obs-studio/libobs .. && make
 matrix:
   include:
     - os: osx
