@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.tfvars": "terraform",
+        "new": "cpp"
+    }
+}

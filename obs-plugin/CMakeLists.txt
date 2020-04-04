@@ -35,14 +35,20 @@ include_directories(${AVFOUNDATION}
                     ${COREMEDIAIO_DAL_INCLUDE_DIRS}
 					${COREMEDIAIO_DAL_IPC_INCLUDE_DIRS}
 					${LIBOBS_INCLUDE_DIR}
-                    client
-                    Plugin)
+                    src)
 
 set(virtualcam-obs-plugin_SOURCES
-    plugin-main.cpp)
+	src/OBSVirtualCamDevice.cpp
+	src/OBSVirtualCamServer.cpp
+	src/plugin-main.cpp)
+
+set(virtualcam-obs-plugin_HEADERS
+	src/OBSVirtualCamDevice.h
+	src/OBSVirtualCamServer.h)
 
 add_library(virtualcam-obs-plugin MODULE
-	${virtualcam-obs-plugin_SOURCES})
+	${virtualcam-obs-plugin_SOURCES}
+	${virtualcam-obs-plugin_HEADERS})
 
 target_link_libraries(virtualcam-obs-plugin
 	${AVFOUNDATION}

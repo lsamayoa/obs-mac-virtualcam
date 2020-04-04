@@ -5,12 +5,15 @@
 #include <servers/bootstrap.h>
 
 #include "CMIODPASampleServer.h"
-#include "CMIO_DPA_Sample_Server_VCamAssistant.h"
-#include "CMIO_DPA_Sample_Server_VCamDevice.h"
 #include "CMIO_DPA_Sample_Server_VCamInputStream.h"
 #include "CAHostTimeBase.h"
 
-CMIO::DPA::Sample::Server::VCamDevice *virtualCamDevice;
+#include "OBSVirtualCamServer.h"
+#include "OBSVirtualCamDevice.h"
+
+
+OBSVirtualCam::OBSVirtualCamServer* server;
+OBSVirtualCam::OBSVirtualCamDevice* virtualCamDevice;
 
 boolean_t MessagesAndNotifications(mach_msg_header_t* request, mach_msg_header_t* reply)
 {
@@ -20,19 +23,16 @@ boolean_t MessagesAndNotifications(mach_msg_header_t* request, mach_msg_header_t
     // If CMIODPASampleServer() did not process the message see if it is a MACH_NOTIFY_NO_SENDERS notification
     if (not processed and MACH_NOTIFY_NO_SENDERS == request->msgh_id)
     {
-        CMIO::DPA::Sample::Server::VCamAssistant::Instance()->ClientDied(request->msgh_local_port);
+        server->ClientDied(request->msgh_local_port);
         processed = true;
     }
     
     return processed;
 }
 
-//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// main()
-//---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 void *virtualCamMain(void *)
 {
-    DebugMessage("starting up");
+    // DebugMessage("starting up");
 
     // Don't allow any exceptions to escape
 	try
@@ -43,20 +43,20 @@ void *virtualCamMain(void *)
 		kern_return_t err = bootstrap_check_in(bootstrap_port, serviceName, &servicePort);
 		if (BOOTSTRAP_SUCCESS != err)
 		{
-			DebugMessage("bootstrap_check_in() failed: 0x%x", err);
+			// DebugMessage("bootstrap_check_in() failed: 0x%x", err);
             return NULL;
-//			exit(43);
 		}
 
 		// Add the service port to the Assistant's port set
-		mach_port_t portSet = CMIO::DPA::Sample::Server::VCamAssistant::Instance()->GetPortSet();
-        virtualCamDevice = dynamic_cast<CMIO::DPA::Sample::Server::VCamDevice*>(*(CMIO::DPA::Sample::Server::VCamAssistant::Instance()->mDevices.begin()));
+        server = new OBSVirtualCam::OBSVirtualCamServer();
+		mach_port_t portSet = server->GetPortSet();
+    
+        virtualCamDevice = dynamic_cast<OBSVirtualCam::OBSVirtualCamDevice*>(*(server->mDevices.begin()));
 		err = mach_port_move_member(mach_task_self(), servicePort, portSet);
 		if (KERN_SUCCESS != err)
 		{
-			DebugMessage("Unable to add service port to port set: 0x%x", err);
+			// DebugMessage("Unable to add service port to port set: 0x%x", err);
             return NULL;
-//			exit(2);
 		}
 
 		// Service incoming messages from the clients and notifications which were signed up for
@@ -68,13 +68,11 @@ void *virtualCamMain(void *)
 	catch (const CAException& exception)
 	{
         return NULL;
-//        exit(exception.GetError());
 	}
 	catch (...)
 	{
-		DebugMessage("Terminated by an an unknown exception");
+		// DebugMessage("Terminated by an an unknown exception");
         return NULL;
-//		exit(44);
 	}
 }
 
