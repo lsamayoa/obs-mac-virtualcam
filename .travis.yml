@@ -16,7 +16,7 @@ script:
   - cd obs-studio
   - mkdir build && cd build && cmake -DQTDIR=/usr/local/opt/qt .. && make
   - cd obs-plugin
-  - mkdir build && cd build && cmake .. && make
+  - mkdir build && cd build && cmake -DLIBOBS_INCLUDE_DIR=../../obs-studio/libobs -D .. && make
 matrix:
   include:
     - os: osx
