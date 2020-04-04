@@ -1,3 +1,4 @@
+language: cpp
 git:
   submodules: true
 before_install:
