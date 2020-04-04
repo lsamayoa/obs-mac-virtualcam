@@ -15,7 +15,9 @@ script:
   - cd ../../
   - git clone --depth 1 https://github.com/lsamayoa/obs-studio.git
   - cd obs-studio
+  - git submodule init && git submodule update
   - mkdir build && cd build && cmake -DQTDIR=/usr/local/opt/qt .. && make
+  - cd ../
   - cd obs-plugin
   - mkdir build && cd build && cmake -DDISABLE_UI=TRUE -DLIBOBS_INCLUDE_DIR=../../obs-studio/libobs -D .. && make
 matrix:
