@@ -1,0 +1,3 @@
+[submodule "libcoremediaio-dal"]
+	path = libcoremediaio-dal
+	url = git@github.com:lsamayoa/libcoremediaio-dal.git
