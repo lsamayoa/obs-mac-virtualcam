@@ -1,0 +1,12 @@
+git:
+  submodules: true
+
+script:
+  - cd libcoremediaio-da
+  - mkdir build
+  - cd build
+  - cmake .. && sudo make install
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode11.3
