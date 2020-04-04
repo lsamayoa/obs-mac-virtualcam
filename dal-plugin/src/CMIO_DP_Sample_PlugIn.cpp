@@ -53,7 +53,6 @@
 #include "CMIO_DP_Sample_PlugIn.h"
 
 // Internal Includes
-#include "CMIO_DP_Sample_IOBackedDevice.h"
 #include "CMIO_DP_Sample_VirtualDevice.h"
 
 // DAL PlugIn Base Includes
@@ -491,13 +490,7 @@ namespace CMIO { namespace DP { namespace Sample
 			ThrowIfError(err, CAException(err), "CMIO::DP::Sample::PlugIn::DeviceArrived: couldn't instantiate the CMIODevice object");
 
 			// Make a device object
-            Device* device;
-			if (isIOBacked) {
-                device = new IOBackedDevice(*this, deviceID, mAssistantPort, guid, registryPath);
-            }
-            else {
-                device = new VirtualDevice(*this, deviceID, mAssistantPort, guid);
-            }
+            Device* device = new VirtualDevice(*this, deviceID, mAssistantPort, guid);
 
 			try
 			{

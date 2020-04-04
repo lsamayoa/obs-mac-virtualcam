@@ -29,26 +29,23 @@ include_directories(${AVFOUNDATION}
                     ${IOSURFACE}
                     ${COREMEDIAIO_DAL_INCLUDE_DIRS}
                     ${COREMEDIAIO_DAL_IPC_INCLUDE_DIRS}
-                    client
-                    Plugin)
+                    src)
 
 set(virtualcam-dal-plugin_HEADERS
-    Plugin/CMIO_DP_Sample_ControlIDs.h
-    Plugin/CMIO_DP_Sample_Device.h
-    Plugin/CMIO_DP_Sample_IOBackedDevice.h
-    Plugin/CMIO_DP_Sample_Plugin.h
-    Plugin/CMIO_DP_Sample_Stream.h
-    Plugin/CMIO_DP_Sample_VirtualDevice.h
-    Plugin/Properties/CMIO_DP_Sample_Property_HogMode.h)
+    src/CMIO_DP_Sample_ControlIDs.h
+    src/CMIO_DP_Sample_Device.h
+    src/CMIO_DP_Sample_Plugin.h
+    src/CMIO_DP_Sample_Stream.h
+    src/CMIO_DP_Sample_VirtualDevice.h
+    src/Properties/CMIO_DP_Sample_Property_HogMode.h)
 
 set(virtualcam-dal-plugin_SOURCES
-    Plugin/CMIO_DP_Sample_Device.cpp
-    Plugin/CMIO_DP_Sample_IOBackedDevice.cpp
-    Plugin/CMIO_DP_Sample_Plugin.cpp
-    Plugin/CMIO_DP_Sample_Stream.cpp
-    Plugin/CMIO_DP_Sample_VirtualDevice.cpp
-    Plugin/CMIO_DP_SampleVCam_PluginInterface.cpp
-    Plugin/Properties/CMIO_DP_Sample_Property_HogMode.cpp)
+    src/CMIO_DP_Sample_Device.cpp
+    src/CMIO_DP_Sample_Plugin.cpp
+    src/CMIO_DP_Sample_Stream.cpp
+    src/CMIO_DP_Sample_VirtualDevice.cpp
+    src/CMIO_DP_SampleVCam_PluginInterface.cpp
+    src/Properties/CMIO_DP_Sample_Property_HogMode.cpp)
 
 
 add_library(virtualcam-dal-plugin MODULE
@@ -69,13 +66,13 @@ target_link_libraries(virtualcam-dal-plugin
 
 # Note: May not be necessary
 target_link_options(virtualcam-dal-plugin
-    PUBLIC -exported_symbols_list ${PROJECT_SOURCE_DIR}/PlugIn/SampleVCam.exp
+    PUBLIC -exported_symbols_list ${PROJECT_SOURCE_DIR}/src/SampleVCam.exp
 )
 
 set_target_properties(virtualcam-dal-plugin
     PROPERTIES
     BUNDLE_EXTENSION plugin
-    MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/PlugIn/Info.plist
+    MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/src/Info.plist
     BUNDLE TRUE)
 
 add_custom_command(TARGET virtualcam-dal-plugin
