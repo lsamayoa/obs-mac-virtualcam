@@ -2,7 +2,7 @@ language: cpp
 git:
   submodules: true
 before_install:
-  - brew install FFmpeg x264 mbedtls swig
+  - brew install FFmpeg Qt5 x264 mbedtls swig
 script:
   - cd libcoremediaio-dal
   - mkdir build && cd build && cmake .. && sudo make install
@@ -16,7 +16,7 @@ script:
   - git clone --depth 1 https://github.com/lsamayoa/obs-studio.git
   - cd obs-studio
   - git submodule init && git submodule update
-  - mkdir build && cd build && cmake .. && make
+  - mkdir build && cd build && cmake -DQTDIR=/usr/local/opt/qt .. && make
   - cd ../../
   - cd obs-plugin
   - mkdir build && cd build && cmake -DLIBOBS_INCLUDE_DIR=../../obs-studio/libobs .. && make
